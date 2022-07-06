@@ -1,0 +1,14 @@
+{
+  "name": "backend-suereno-cafe",
+  "version": "1.0.0",
+  "description": "Servidor Backend - Cafe Surennho",
+  "main": "index.js",
+  "scripts": {
+    "app": "nodemon app.js"
+  },
+  "author": "Abraham Marianjel",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
