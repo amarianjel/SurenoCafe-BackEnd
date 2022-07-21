@@ -105,7 +105,7 @@ const actualizarDulce = async(req, res) => {
         if(!id || !dulce){
             return res.status(404).send({
                 error: dulce,
-                mensaje: 'Debe proveer un id y los datos del producto'
+                mensaje: 'Debe proveer un id y los datos del dulce'
             });
         }
 

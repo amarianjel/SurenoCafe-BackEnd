@@ -51,7 +51,7 @@ const crearSalado = async(req, res) => {
                 });
             } else {
                 res.status(200).json({ 
-                    Mensaje: "Insertado el Dulce ",
+                    Mensaje: "Insertado el Salado ",
                     Nombre_Dulce: datosSalado["name"],
                     Arreglo: results
                 });
@@ -87,7 +87,7 @@ const actualizarSalado = async(req, res) => {
         if(!id || !salado){
             return res.status(404).send({
                 error: salado,
-                mensaje: 'Debe proveer un id y los datos del producto'
+                mensaje: 'Debe proveer un id y los datos del salado'
             });
         }
 
