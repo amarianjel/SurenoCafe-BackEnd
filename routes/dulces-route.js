@@ -3,14 +3,15 @@
 */
 const { Router } = require('express');
 const { check } = require('express-validator');
-const {validarCampos } = require('../middlewares/validar-campos');
+const { validarCampos } = require('../middlewares/validar-campos');
+const { validarJWT } = require('../middlewares/validar-jwt');
 
 const { getDulces, getDulce, crearDulce, actualizarDulce, borrarDulce } = require('../controllers/dulces-controller');
 
 const router = Router();
 
 
-router.get('/', getDulces);
+router.get('/', validarJWT, getDulces);
 
 router.get('/:id', getDulce);
 
