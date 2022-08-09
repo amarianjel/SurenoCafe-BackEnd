@@ -5,7 +5,7 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validar-campos');
 
-const { getAuths, crearAuth, login, actualizarImagenAuth, actualizarAuth } = require('../controllers/auth-controller');
+const { getAuths, crearAuth, login, actualizarAuth, borrarAuth } = require('../controllers/auth-controller');
 const { validarJWT } = require('../middlewares/validar-jwt');
 
 const router = Router();
@@ -32,6 +32,7 @@ router.post('/login',
 
 router.put('/:id', actualizarAuth);
 
-//router.put('/img/:id', actualizarImagenAuth);
+router.delete('/:id', borrarAuth);
+
 
 module.exports = router;

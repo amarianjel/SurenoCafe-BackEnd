@@ -23,11 +23,7 @@ router.post('/', [
     crearDulce
 );
 
-router.put('/:id',/*[
-    check('name', 'El nombre es obligatorio para no perderse').not().isEmpty(),
-    validarCampos
-    ],*/
-    actualizarDulce
+router.put('/:id', actualizarDulce
 );
 
 router.delete('/:id', borrarDulce);

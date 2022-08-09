@@ -133,51 +133,27 @@ const actualizarAuth =  async(req, res) => {
     });
 }
 
-const actualizarImagenAuth = (req, res) => {
-    /*let id = req.params.id;
-    if (!req.files) {
-        return res.status(400).json({
+const borrarAuth =  async(req, res) => {
+    const id = req.params.id;
+    console.log(id);
+
+    try{
+        mysqlConnection.query("DELETE FROM auth WHERE prodId = ?", id, (error, result) => {
+            if (error) {
+                return res.status(500).json({ Mensaje: "Error" });
+            } else {
+                return res.status(200).json({ Mensaje: "Registro con id=" + id + " Borrado" });
+            }
+        });
+
+    }catch (error) {
+
+        console.log(error);
+        res.status(500).json({
             ok: false,
-            mensaje: "No selecciono nada",
-            errors: { message: 'Debe seleccionar una imagen' }
+            msg: 'Hable con el administrador'
         });
     }
-    // Obtener nombre del archivo
-    let archivo = req.files.img;
-    let nombreCortado = archivo.name.split('.');
-    let extensionArchivo = nombreCortado[nombreCortado.length - 1];
-
-    //Solo estas extensiones
-    let extensionesValidas = ['png', 'jpeg', 'jpg', 'gif'];
-    if (extensionesValidas.indexOf(extensionArchivo) < 0) {
-        return res.status(400).json({
-            ok: false,
-            mensaje: 'Extension no valida',
-            errors: { message: 'Las extensiones válidas son ' + extensionesValidas.json(', ') }
-        });
-    };
-    // Nombre personalizado del archivo
-    let nombreArchivo = `${id}-${new Date().getMilliseconds()}.${extensionArchivo}`;
-
-    //Mover el archivo del temporal a un path
-    let path = `./uploads/auth/${nombreArchivo}`;
-
-    console.log(path);
-
-    archivo.mv(path, err => {
-        if (err) {
-            return res.status(500).json({
-                ok: false,
-                mensaje: 'Error al mover archivo',
-                errors: err
-            });
-        }
-
-        return res.status(200).json({
-            ok: true,
-            mensaje: 'petición realizada correctamente'
-        });
-    });*/
 }
 
 module.exports = {
@@ -185,5 +161,5 @@ module.exports = {
     crearAuth,
     login,
     actualizarAuth,
-    actualizarImagenAuth,
+    borrarAuth
 }
