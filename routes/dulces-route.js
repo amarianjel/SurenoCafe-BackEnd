@@ -11,7 +11,7 @@ const { getDulces, getDulce, crearDulce, actualizarDulce, borrarDulce } = requir
 const router = Router();
 
 
-router.get('/', validarJWT, getDulces);
+router.get('/', getDulces);
 
 router.get('/:id', getDulce);
 
@@ -23,10 +23,10 @@ router.post('/', [
     crearDulce
 );
 
-router.put('/:id',[
+router.put('/:id',/*[
     check('name', 'El nombre es obligatorio para no perderse').not().isEmpty(),
     validarCampos
-    ],
+    ],*/
     actualizarDulce
 );
 

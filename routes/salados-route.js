@@ -22,10 +22,10 @@ router.post('/', [
     crearSalado
 );
 
-router.put('/:id',[
+router.put('/:id',/*[
     check('name', 'El nombre es obligatorio para no perderse').not().isEmpty(),
     validarCampos
-    ],
+    ],*/
     actualizarSalado
 );
 

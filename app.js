@@ -17,17 +17,16 @@ app.use((req, res, next) => {
     next();
 });
 
-
 //Lectura y parseo del Body
 //app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
 // Routes
 app.use('/dulces', require('./routes/dulces-route'));
 app.use('/salados', require('./routes/salados-route'));
-app.use('/login', require('./routes/auth-route'));
+app.use('/auth', require('./routes/auth-route'));
+app.use('/uploads', require('./routes/uploads-route'));
 
 // ? Escuchar peticiones
 app.listen(process.env.PORT, () => {

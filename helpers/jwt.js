@@ -1,11 +1,11 @@
 const jwt = require('jsonwebtoken');
 
-const generarJWT = (uid) => {
-
+const generarJWT = (user) => {
+    let jj;
     return new Promise((resolve, reject) => {
 
         const payload = {
-            uid,
+            user,
         };
 
         jwt.sign(payload, process.env.JWT_SECRET, {
@@ -18,13 +18,14 @@ const generarJWT = (uid) => {
             } else {
                 resolve(token);
             }
+            return jj = token;
 
         });
 
     });
 
 }
-
+//! Funciona dentro de la promesa
 
 module.exports = {
     generarJWT,
