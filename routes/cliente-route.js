@@ -1,5 +1,5 @@
 /*
-    Ruta: /auth
+    Ruta: /cliente
 */
 const { Router } = require('express');
 const { check } = require('express-validator');
