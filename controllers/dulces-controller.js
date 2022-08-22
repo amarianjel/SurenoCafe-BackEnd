@@ -50,7 +50,8 @@ const crearDulce = async(req, res) => {
             cantidad: req.body.cantidad,
             price: req.body.price,
             description: req.body.description,
-            imageUrl: req.body.imageUrl
+            imageUrl: req.body.imageUrl,
+            stock: req.body.stock
         };
 
         //* Mapeo los errores del Check ahora esta en Validar Campos
