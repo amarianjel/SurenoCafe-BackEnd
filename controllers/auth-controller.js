@@ -138,7 +138,7 @@ const borrarAuth =  async(req, res) => {
     console.log(id);
 
     try{
-        mysqlConnection.query("DELETE FROM auth WHERE prodId = ?", id, (error, result) => {
+        mysqlConnection.query("DELETE FROM auth WHERE userId = ?", id, (error, result) => {
             if (error) {
                 return res.status(500).json({ Mensaje: "Error" });
             } else {
