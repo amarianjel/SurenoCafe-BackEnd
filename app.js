@@ -63,6 +63,7 @@ app.post('/cliente', function(req,res){
 app.use('/dulces', require('./routes/dulces-route'));
 app.use('/salados', require('./routes/salados-route'));
 app.use('/auth', require('./routes/auth-route'));
+app.use('/cliente', require('./routes/cliente-route'));
 
 // ? Escuchar peticiones
 app.listen(process.env.PORT, () => {

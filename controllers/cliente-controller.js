@@ -5,8 +5,8 @@ const { generarJWT } = require('../helpers/jwt');
 
 
 
-const getAuths = async ( req, res = response ) => {
-    mysqlConnection.query('SELECT * FROM auth', (err, rows, fields) => {
+const getClientes = async ( req, res = response ) => {
+    mysqlConnection.query('SELECT * FROM cliente', (err, rows, fields) => {
         if(!err) {
           res.json(rows);
         } else {
@@ -15,18 +15,18 @@ const getAuths = async ( req, res = response ) => {
       });
 }
 
-const crearAuth = async( req, res ) => {
+const crearCliente = async( req, res ) => {
     try{
-        let datosAuth = {
+        let datosCliente = {
             //userId autoincremental
-            userName: req.body.name,
-            userEmail: req.body.email,
-            userPassword: bcrypt.hashSync(req.body.password, 10),
-            userImg: req.body.img,
-            userRole: req.body.role,
+            cliName: req.body.name,
+            cliEmail: req.body.email,
+            cliPassword: bcrypt.hashSync(req.body.password, 10),
+            cliImg: req.body.img,
+            cliTelefono: req.body.telefono
         };
 
-        mysqlConnection.query("INSERT INTO auth SET ?", datosAuth, (error, result) => {
+        mysqlConnection.query("INSERT INTO cliente SET ?", datosCliente, (error, result) => {
             if(error){
                 return res.status(400).json({
                     ok: false,
@@ -35,9 +35,9 @@ const crearAuth = async( req, res ) => {
                 });
             }else{
                 res.status(200).json({
-                    Mensaje: "Insertado el Auth",
+                    Mensaje: "Insertado el Cliente",
                     ok: true,
-                    Nombre_Auth: datosAuth["userName"],
+                    Nombre_Cliente: datosCliente["cliName"],
                 });
             }
     });
@@ -56,11 +56,11 @@ const login = async( req, res ) => {
 
     try{
 
-        mysqlConnection.query("SELECT * FROM auth WHERE userEmail = ?", email, (error, results,fields) => {
+        mysqlConnection.query("SELECT * FROM cliente WHERE cliEmail = ?", email, (error, results,fields) => {
             if(error){
                 return res.status(500).json({
                     ok: false,
-                    mensaje: 'Error al buscar al Auth',
+                    mensaje: 'Error al buscar al Cliente',
                     errors: error
                 });
             }
@@ -73,7 +73,7 @@ const login = async( req, res ) => {
             }
 
             // + Installar Cors
-            if(!bcrypt.compareSync(password, results[0].userPassword)){
+            if(!bcrypt.compareSync(password, results[0].cliPassword)){
                 return res.status(400).json({
                     ok:false,
                     mensaje: 'Credenciales incorrectas - password',
@@ -84,11 +84,11 @@ const login = async( req, res ) => {
             
 
             //+ Generar el TOKEN - JWT
-            generarJWT( results[0].userPassword ).then(( token ) => {
+            generarJWT( results[0].cliPassword ).then(( token ) => {
                 res.status(200).json({
                     ok:true,
                     Auth: results,
-                    id: results[0].userId,
+                    id: results[0].cliId,
                     token: token
                 });
             });
@@ -118,27 +118,27 @@ const login = async( req, res ) => {
     }
 }
 
-const actualizarAuth =  async(req, res) => {
+const actualizarCliente =  async(req, res) => {
     let id = req.params.id;
-    let auth = req.body;
+    let cliente = req.body;
 
-    if (!id || !auth) {
+    if (!id || !cliente) {
         return res.status(400).send({ error: producto, message: 'Debe proveer un id y los datos de un producto' });
     }
     
-    mysqlConnection.query("UPDATE auth SET ? WHERE userId = ?", [auth, id], function(error, results, fields) {
+    mysqlConnection.query("UPDATE cliente SET ? WHERE cliId = ?", [cliente, id], function(error, results, fields) {
         if (error) throw error;
         return res.status(200).json({ "Mensaje": "Registro con id=" + id + " ha sido actualizado"
         });
     });
 }
 
-const borrarAuth =  async(req, res) => {
+const borrarCliente =  async(req, res) => {
     const id = req.params.id;
     console.log(id);
 
     try{
-        mysqlConnection.query("DELETE FROM auth WHERE userId = ?", id, (error, result) => {
+        mysqlConnection.query("DELETE FROM cliente WHERE cliId = ?", id, (error, result) => {
             if (error) {
                 return res.status(500).json({ Mensaje: "Error" });
             } else {
@@ -157,9 +157,9 @@ const borrarAuth =  async(req, res) => {
 }
 
 module.exports = {
-    getAuths,
-    crearAuth,
+    getClientes,
+    crearCliente,
     login,
-    actualizarAuth,
-    borrarAuth
+    actualizarCliente,
+    borrarCliente
 }

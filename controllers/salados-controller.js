@@ -41,7 +41,8 @@ const crearSalado = async(req, res) => {
             cantidad: req.body.cantidad,
             price: req.body.price,
             description: req.body.description,
-            imageUrl: req.body.imageUrl
+            imageUrl: req.body.imageUrl,
+            stock: req.body.stock
         };
 
         mysqlConnection.query("INSERT INTO salados SET ?", datosSalado, (error, results) => {
