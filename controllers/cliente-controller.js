@@ -18,7 +18,6 @@ const getClientes = async ( req, res = response ) => {
 const crearCliente = async( req, res ) => {
     try{
         let datosCliente = {
-            //userId autoincremental
             cliName: req.body.name,
             cliEmail: req.body.email,
             cliPassword: bcrypt.hashSync(req.body.password, 10),
@@ -87,8 +86,7 @@ const login = async( req, res ) => {
             generarJWT( results[0].cliPassword ).then(( token ) => {
                 res.status(200).json({
                     ok:true,
-                    Auth: results,
-                    id: results[0].cliId,
+                    Cliente: results,
                     token: token
                 });
             });
@@ -119,30 +117,30 @@ const login = async( req, res ) => {
 }
 
 const actualizarCliente =  async(req, res) => {
-    let id = req.params.id;
+    let email = req.params.email;   //+ Aqui debio ser un id, ya que es más fácil localizar por que es único
     let cliente = req.body;
 
-    if (!id || !cliente) {
-        return res.status(400).send({ error: producto, message: 'Debe proveer un id y los datos de un producto' });
+    if (!email || !cliente) {
+        return res.status(400).send({ error: cliente, message: 'Debe proveer un email existente y los datos de un cliente' });
     }
     
-    mysqlConnection.query("UPDATE cliente SET ? WHERE cliId = ?", [cliente, id], function(error, results, fields) {
+    mysqlConnection.query("UPDATE cliente SET ? WHERE cliEmail = ?", [cliente, email], function(error, results, fields) {
         if (error) throw error;
-        return res.status(200).json({ "Mensaje": "Registro con id=" + id + " ha sido actualizado"
+        return res.status(200).json({ "Mensaje": "Registro con el email =" + email + " ha sido actualizado"
         });
     });
 }
 
 const borrarCliente =  async(req, res) => {
-    const id = req.params.id;
-    console.log(id);
+    const email = req.params.email;
+    console.log(email);
 
     try{
-        mysqlConnection.query("DELETE FROM cliente WHERE cliId = ?", id, (error, result) => {
+        mysqlConnection.query("DELETE FROM cliente WHERE cliEmail = ?", email, (error, result) => {
             if (error) {
                 return res.status(500).json({ Mensaje: "Error" });
             } else {
-                return res.status(200).json({ Mensaje: "Registro con id=" + id + " Borrado" });
+                return res.status(200).json({ Mensaje: "Registro con el email =" + email + " Borrado" });
             }
         });
 

@@ -30,7 +30,7 @@ router.post('/login',
     login
 );
 
-router.put('/:id', actualizarCliente);
+router.put('/:email', actualizarCliente);
 
 router.delete('/:id', borrarCliente);
 

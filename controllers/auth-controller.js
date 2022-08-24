@@ -123,7 +123,7 @@ const actualizarAuth =  async(req, res) => {
     let auth = req.body;
 
     if (!id || !auth) {
-        return res.status(400).send({ error: producto, message: 'Debe proveer un id y los datos de un producto' });
+        return res.status(400).send({ error: auth, message: 'Debe proveer un id y los datos de un auth' });
     }
     
     mysqlConnection.query("UPDATE auth SET ? WHERE userId = ?", [auth, id], function(error, results, fields) {
