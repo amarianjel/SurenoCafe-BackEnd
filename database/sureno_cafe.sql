@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-08-2022 a las 03:32:02
+-- Tiempo de generación: 24-08-2022 a las 07:07:07
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -52,12 +52,11 @@ INSERT INTO `auth` (`userId`, `userName`, `userEmail`, `userPassword`, `userImg`
 --
 
 CREATE TABLE `cliente` (
-  `cliId` int(11) NOT NULL,
   `cliName` varchar(64) NOT NULL,
   `cliEmail` varchar(100) NOT NULL,
   `cliPassword` varchar(255) NOT NULL,
   `cliImg` varchar(255) DEFAULT NULL,
-  `cliTelefono` varchar(16) DEFAULT NULL,
+  `cliTelefono` varchar(16) NOT NULL,
   `cliToken` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -65,10 +64,10 @@ CREATE TABLE `cliente` (
 -- Volcado de datos para la tabla `cliente`
 --
 
-INSERT INTO `cliente` (`cliId`, `cliName`, `cliEmail`, `cliPassword`, `cliImg`, `cliTelefono`, `cliToken`) VALUES
-(1, 'Abraham Marianjel Sepúlveda', 'abr@gmail.com', '$2b$10$TBYpxFrxieQabyP3my/Q2.ds2HQoJ/y.rg4p3Pzu6y778KvsMuwQ6', 'https://4.bp.blogspot.com/-ZjmN5oVtWPs/WFvd74Yyl4I/AAAAAAAAAv4/edwGnBzKwQIbAZ90o5LUKhgSiD64JnGDgCLcB/s640/6.jpg', '+56999044562', NULL),
-(2, 'Gokú', 'goku@dragonballz.cl', 'goku', 'https://depor.com/resizer/pfVziOV4X8Vu9nwknDc-oNItlB8=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/6Y2EDIISGFGVFANEVDCR5LCG34.jpg', '+56999044562', NULL),
-(3, 'Dua Lipa', 'dualipa@gmail.com', '$2b$10$X6dFz.dc91ftgy/Ghx3/LeF.Cxe/qnwL9oamHToiAtskc44kNfoyq', 'https://media.vogue.mx/photos/6082d0d36e82e15ad6aefd7a/2:3/w_2560%2Cc_limit/GettyImages-1307105605.jpg', '+569090980', NULL);
+INSERT INTO `cliente` (`cliName`, `cliEmail`, `cliPassword`, `cliImg`, `cliTelefono`, `cliToken`) VALUES
+('Abraham Marianjel Sepúlveda', 'abr@gmail.com', '$2b$10$TBYpxFrxieQabyP3my/Q2.ds2HQoJ/y.rg4p3Pzu6y778KvsMuwQ6', 'https://4.bp.blogspot.com/-ZjmN5oVtWPs/WFvd74Yyl4I/AAAAAAAAAv4/edwGnBzKwQIbAZ90o5LUKhgSiD64JnGDgCLcB/s640/6.jpg', '999044562', NULL),
+('Dua Lipa', 'dualipa@gmail.com', '$2b$10$X6dFz.dc91ftgy/Ghx3/LeF.Cxe/qnwL9oamHToiAtskc44kNfoyq', 'https://media.vogue.mx/photos/6082d0d36e82e15ad6aefd7a/2:3/w_2560%2Cc_limit/GettyImages-1307105605.jpg', '990990980', NULL),
+('Gokú', 'goku@dragonballz.cl', 'goku', 'https://depor.com/resizer/pfVziOV4X8Vu9nwknDc-oNItlB8=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/6Y2EDIISGFGVFANEVDCR5LCG34.jpg', '+56999044562', NULL);
 
 -- --------------------------------------------------------
 
@@ -79,7 +78,7 @@ INSERT INTO `cliente` (`cliId`, `cliName`, `cliEmail`, `cliPassword`, `cliImg`, 
 CREATE TABLE `contienedulces` (
   `id_pedido` int(11) NOT NULL,
   `prodId` int(11) NOT NULL,
-  `cantidad_producto` int(11) DEFAULT NULL
+  `cantidad_producto` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -91,7 +90,7 @@ CREATE TABLE `contienedulces` (
 CREATE TABLE `contienesalados` (
   `id_pedido` int(11) NOT NULL,
   `prodId` int(11) NOT NULL,
-  `cantidad_producto` int(11) DEFAULT NULL
+  `cantidad_producto` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -152,7 +151,7 @@ CREATE TABLE `pedido` (
   `fecha_pedido` date NOT NULL,
   `fecha_agendada` date NOT NULL,
   `email` varchar(255) NOT NULL,
-  `hora` varchar(5) DEFAULT NULL
+  `hora` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -215,17 +214,92 @@ ALTER TABLE `auth`
 -- Indices de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  ADD PRIMARY KEY (`cliId`);
+  ADD PRIMARY KEY (`cliEmail`);
+
+--
+-- Indices de la tabla `contienedulces`
+--
+ALTER TABLE `contienedulces`
+  ADD PRIMARY KEY (`id_pedido`,`prodId`),
+  ADD KEY `prodId` (`prodId`);
+
+--
+-- Indices de la tabla `contienesalados`
+--
+ALTER TABLE `contienesalados`
+  ADD PRIMARY KEY (`id_pedido`,`prodId`),
+  ADD KEY `prodId` (`prodId`);
+
+--
+-- Indices de la tabla `dulces`
+--
+ALTER TABLE `dulces`
+  ADD PRIMARY KEY (`prodId`);
+
+--
+-- Indices de la tabla `pedido`
+--
+ALTER TABLE `pedido`
+  ADD PRIMARY KEY (`id_pedido`),
+  ADD KEY `email` (`email`);
+
+--
+-- Indices de la tabla `salados`
+--
+ALTER TABLE `salados`
+  ADD PRIMARY KEY (`prodId`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT de la tabla `cliente`
+-- AUTO_INCREMENT de la tabla `auth`
 --
-ALTER TABLE `cliente`
-  MODIFY `cliId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `auth`
+  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `dulces`
+--
+ALTER TABLE `dulces`
+  MODIFY `prodId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT de la tabla `pedido`
+--
+ALTER TABLE `pedido`
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `salados`
+--
+ALTER TABLE `salados`
+  MODIFY `prodId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `contienedulces`
+--
+ALTER TABLE `contienedulces`
+  ADD CONSTRAINT `contienedulces_ibfk_1` FOREIGN KEY (`prodId`) REFERENCES `dulces` (`prodId`),
+  ADD CONSTRAINT `contienedulces_ibfk_2` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id_pedido`);
+
+--
+-- Filtros para la tabla `contienesalados`
+--
+ALTER TABLE `contienesalados`
+  ADD CONSTRAINT `contienesalados_ibfk_1` FOREIGN KEY (`prodId`) REFERENCES `salados` (`prodId`),
+  ADD CONSTRAINT `contienesalados_ibfk_2` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id_pedido`);
+
+--
+-- Filtros para la tabla `pedido`
+--
+ALTER TABLE `pedido`
+  ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`email`) REFERENCES `cliente` (`cliEmail`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
