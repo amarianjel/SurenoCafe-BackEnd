@@ -135,7 +135,6 @@ const actualizarCliente =  async(req, res) => {
 
 const borrarCliente =  async(req, res) => {
     const email = req.params.email;
-    console.log(email);
 
     try{
         mysqlConnection.query("DELETE FROM cliente WHERE cliEmail = ?", email, (error, result) => {

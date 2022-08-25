@@ -32,7 +32,7 @@ router.post('/login',
 
 router.put('/:email', actualizarCliente);
 
-router.delete('/:id', borrarCliente);
+router.delete('/:email', borrarCliente);
 
 
 module.exports = router;

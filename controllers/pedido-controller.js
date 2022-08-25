@@ -19,10 +19,11 @@ const crearPedido = async( req, res ) => {
     try{
         let datosPedido = {
             //id autoincremental
-            fecha_pedido: req.body.fPedido,
-            fecha_agendada: req.body.fAgendada,
+            fecha_pedido: req.body.fechaPedido,
+            fecha_agendada: req.body.fechaAgendada,
             email: req.body.email,
             hora: req.body.hora,
+            local: req.body.local
         };
 
         mysqlConnection.query("INSERT INTO pedido SET ?", datosPedido, (error, result) => {
@@ -34,9 +35,9 @@ const crearPedido = async( req, res ) => {
                 });
             }else{
                 res.status(200).json({
-                    Mensaje: "Insertado el Auth",
+                    Mensaje: "Insertado el Pedido",
                     ok: true,
-                    Nombre_Auth: datosPedido["fecha_pedido"],
+                    Fecha_Pedido: datosPedido["fecha_pedido"],
                 });
             }
     });
@@ -59,7 +60,7 @@ const borrarPedido =  async(req, res) => {
             if (error) {
                 return res.status(500).json({ Mensaje: "Error" });
             } else {
-                return res.status(200).json({ Mensaje: "Registro con id =" + id + " Borrado" });
+                return res.status(200).json({ Mensaje: "Registro con id = " + id + " Borrado" });
             }
         });
 
