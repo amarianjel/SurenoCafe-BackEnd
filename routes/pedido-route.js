@@ -12,13 +12,7 @@ const router = Router();
 
 router.get('/', getPedidos);
 
-router.post('/', 
-    [
-        check('fPedido', 'La Fecha del Pedido es obligatorio').not().isEmpty(),
-        validarCampos
-    ],
-    crearPedido
-);
+router.post('/',crearPedido);
 
 router.delete('/:id', borrarPedido);
 

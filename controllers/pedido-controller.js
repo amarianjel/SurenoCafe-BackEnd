@@ -23,6 +23,7 @@ const crearPedido = async( req, res ) => {
             fecha_agendada: req.body.fAgendada,
             email: req.body.email,
             hora: req.body.hora,
+            local: req.body.local
         };
 
         mysqlConnection.query("INSERT INTO pedido SET ?", datosPedido, (error, result) => {
