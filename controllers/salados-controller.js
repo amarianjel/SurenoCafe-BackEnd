@@ -83,10 +83,12 @@ const crearContieneSalado = async(req, res) => {
         mysqlConnection.query("INSERT INTO contienesalados SET ?", datosContieneSalado, (error, results) => {
             if (error) {
                 res.status(400).json({ 
+                    ok:false,
                     Mensaje: "Error" 
                 });
             } else {
                 res.status(200).json({ 
+                    ok:true,
                     Mensaje: "Insertado el contienesalado ",
                     Arreglo: results
                 });
