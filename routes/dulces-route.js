@@ -6,10 +6,11 @@ const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-jwt');
 
-const { getDulces, getDulce, crearDulce, actualizarDulce, borrarDulce, crearContieneDulce } = require('../controllers/dulces-controller');
+const { getDulces, getDulce, crearDulce, actualizarDulce, borrarDulce, crearContieneDulce, dulcesMasVendidos } = require('../controllers/dulces-controller');
 
 const router = Router();
 
+router.get('/masVendidos', dulcesMasVendidos);
 
 router.get('/', getDulces);
 

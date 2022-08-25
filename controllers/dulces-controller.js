@@ -128,6 +128,16 @@ const actualizarDulce = async(req, res) => {
 
 
 
+const dulcesMasVendidos = async(req, res) => {
+    mysqlConnection.query('select name, imageUrl, COUNT(*)  from dulces inner join contienedulces ON dulces.prodId=contienedulces.prodId group BY contienedulces.prodId order by count(*) desc', (err, rows, fields) => {
+        if(!err) {
+          res.json(rows);
+        } else {
+          console.log(err);
+        }
+      }); 
+}
+
 
 const crearContieneDulce = async(req, res) => {
     try{
@@ -194,6 +204,8 @@ module.exports = {
     getDulce,
     crearDulce,
     actualizarDulce,
-    borrarDulce, 
+    borrarDulce,  
+    dulcesMasVendidos,
     crearContieneDulce
+   
 }

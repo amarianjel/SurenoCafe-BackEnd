@@ -71,6 +71,15 @@ const crearSalado = async(req, res) => {
 
 
 
+const saladosMasVendidos = async(req, res) => {
+    mysqlConnection.query('select name, imageUrl, COUNT(*)  from salados inner join contienesalados ON salados.prodId=contienesalados.prodId group BY contienesalados.prodId order by count(*) desc', (err, rows, fields) => {
+        if(!err) {
+          res.json(rows);
+        } else {
+          console.log(err);
+        }
+      }); 
+}
 
 const crearContieneSalado = async(req, res) => {
     try{
@@ -173,9 +182,11 @@ const borrarSalado =  async(req, res) => {
 
 // Todo: Exportaciones de modulos
 module.exports = {
+    
     getSalados,
     getSalado,
     crearSalado,
+    saladosMasVendidos,
     actualizarSalado,
     borrarSalado,
     crearContieneSalado
