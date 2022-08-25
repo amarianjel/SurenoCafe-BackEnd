@@ -12,17 +12,7 @@ const router = Router();
 
 router.get('/', getPedidos);
 
-router.post('/', 
-    [
-        check('fechaPedido', 'La Fecha del Pedido es obligatorio').not().isEmpty(),
-        check('fechaAgendada', 'La Fecha del Pedido es obligatorio').not().isEmpty(),
-        check('hora', 'La Fecha del Pedido es obligatorio').not().isEmpty(),
-        check('local', 'La Fecha del Pedido es obligatorio').not().isEmpty(),
-
-        validarCampos
-    ],
-    crearPedido
-);
+router.post('/',crearPedido);
 
 router.delete('/:id', borrarPedido);
 

@@ -21,8 +21,8 @@ const crearCliente = async( req, res ) => {
             cliName: req.body.name,
             cliEmail: req.body.email,
             cliPassword: bcrypt.hashSync(req.body.password, 10),
-            cliImg: req.body.img,
-            cliTelefono: req.body.telefono
+           
+            cliTelefono: req.body.phone
         };
 
         console.log(datosCliente);

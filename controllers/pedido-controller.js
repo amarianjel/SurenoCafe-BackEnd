@@ -29,6 +29,7 @@ const crearPedido = async( req, res ) => {
         mysqlConnection.query("INSERT INTO pedido SET ?", datosPedido, (error, result) => {
             if(error){
                 return res.status(400).json({
+                    
                     ok: false,
                     mensaje: 'Error al crear al Administrador',
                     errors: error
@@ -37,7 +38,8 @@ const crearPedido = async( req, res ) => {
                 res.status(200).json({
                     Mensaje: "Insertado el Pedido",
                     ok: true,
-                    Fecha_Pedido: datosPedido["fecha_pedido"],
+                    Nombre_Auth: datosPedido["fecha_pedido"],
+                    id: result.insertId
                 });
             }
     });

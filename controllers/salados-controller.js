@@ -68,6 +68,55 @@ const crearSalado = async(req, res) => {
     }
 }
 
+
+
+
+const saladosMasVendidos = async(req, res) => {
+    mysqlConnection.query('select name, imageUrl, COUNT(*)  from salados inner join contienesalados ON salados.prodId=contienesalados.prodId group BY contienesalados.prodId order by count(*) desc', (err, rows, fields) => {
+        if(!err) {
+          res.json(rows);
+        } else {
+          console.log(err);
+        }
+      }); 
+}
+
+const crearContieneSalado = async(req, res) => {
+    try{
+        let datosContieneSalado = {
+            id_pedido: req.body.id_pedido,
+            prodId: req.body.prodId,
+            cantidad_producto: req.body.cantidad_producto
+        };
+
+        mysqlConnection.query("INSERT INTO contienesalados SET ?", datosContieneSalado, (error, results) => {
+            if (error) {
+                res.status(400).json({ 
+                    ok:false,
+                    Mensaje: "Error" 
+                });
+            } else {
+                res.status(200).json({ 
+                    ok:true,
+                    Mensaje: "Insertado el contienesalado ",
+                    Arreglo: results
+                });
+            }
+        });
+
+    }catch (err) {
+        console.log(err);
+        res.status(500).json({
+            ok: false,
+            msg: 'Error insesperado.. revisar logs'
+        });
+    }
+}
+
+
+
+
+
 const actualizarSalado = async(req, res) => {
     const id = req.params.id;
     const salado = req.body;
@@ -133,9 +182,12 @@ const borrarSalado =  async(req, res) => {
 
 // Todo: Exportaciones de modulos
 module.exports = {
+    
     getSalados,
     getSalado,
     crearSalado,
+    saladosMasVendidos,
     actualizarSalado,
-    borrarSalado
+    borrarSalado,
+    crearContieneSalado
 }

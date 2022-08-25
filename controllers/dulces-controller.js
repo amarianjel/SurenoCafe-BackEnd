@@ -126,6 +126,55 @@ const actualizarDulce = async(req, res) => {
     }
 }
 
+
+
+const dulcesMasVendidos = async(req, res) => {
+    mysqlConnection.query('select name, imageUrl, COUNT(*)  from dulces inner join contienedulces ON dulces.prodId=contienedulces.prodId group BY contienedulces.prodId order by count(*) desc', (err, rows, fields) => {
+        if(!err) {
+          res.json(rows);
+        } else {
+          console.log(err);
+        }
+      }); 
+}
+
+
+const crearContieneDulce = async(req, res) => {
+    try{
+        let datosContieneDulce = {
+            id_pedido: req.body.id_pedido,
+            prodId: req.body.prodId,
+            cantidad_producto: req.body.cantidad_producto
+        };
+
+        mysqlConnection.query("INSERT INTO contienedulces SET ?", datosContieneDulce, (error, results) => {
+            if (error) {
+                res.status(400).json({ 
+                    ok:false,
+                    Mensaje: "Error" 
+                });
+            } else {
+                res.status(200).json({ 
+                    ok:true,
+                    Mensaje: "Insertado el contiene dulce ",
+                    Arreglo: results
+                });
+            }
+        });
+
+    }catch (err) {
+        console.log(err);
+        res.status(500).json({
+            ok: false,
+            msg: 'Error insesperado.. revisar logs'
+        });
+    }
+}
+
+
+
+
+
 const borrarDulce =  async(req, res) => {
     const id = req.params.id;
     console.log(id);
@@ -155,5 +204,8 @@ module.exports = {
     getDulce,
     crearDulce,
     actualizarDulce,
-    borrarDulce
+    borrarDulce,  
+    dulcesMasVendidos,
+    crearContieneDulce
+   
 }
