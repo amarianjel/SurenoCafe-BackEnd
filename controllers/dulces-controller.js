@@ -126,6 +126,43 @@ const actualizarDulce = async(req, res) => {
     }
 }
 
+
+
+
+const crearContieneDulce = async(req, res) => {
+    try{
+        let datosContieneDulce = {
+            id_pedido: req.body.id_pedido,
+            prodId: req.body.prodId,
+            cantidad_producto: req.body.cantidad_producto
+        };
+
+        mysqlConnection.query("INSERT INTO contienedulces SET ?", datosContieneDulce, (error, results) => {
+            if (error) {
+                res.status(400).json({ 
+                    Mensaje: "Error" 
+                });
+            } else {
+                res.status(200).json({ 
+                    Mensaje: "Insertado el contiene dulce ",
+                    Arreglo: results
+                });
+            }
+        });
+
+    }catch (err) {
+        console.log(err);
+        res.status(500).json({
+            ok: false,
+            msg: 'Error insesperado.. revisar logs'
+        });
+    }
+}
+
+
+
+
+
 const borrarDulce =  async(req, res) => {
     const id = req.params.id;
     console.log(id);
@@ -155,5 +192,6 @@ module.exports = {
     getDulce,
     crearDulce,
     actualizarDulce,
-    borrarDulce
+    borrarDulce, 
+    crearContieneDulce
 }
