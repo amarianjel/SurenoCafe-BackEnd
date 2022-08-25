@@ -19,8 +19,8 @@ const crearPedido = async( req, res ) => {
     try{
         let datosPedido = {
             //id autoincremental
-            fecha_pedido: req.body.fechaPedido,
-            fecha_agendada: req.body.fechaAgendada,
+            fecha_pedido: req.body.fPedido,
+            fecha_agendada: req.body.fAgendada,
             email: req.body.email,
             hora: req.body.hora,
             local: req.body.local
