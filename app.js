@@ -33,32 +33,6 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post('/cliente', function(req,res){
-    let datosCliente={
-        email:req.body.email,
-        nombre_cliente:req.body.name,
-        contrasenia:bcrypt.hashSync(req.body.password, 10),
-        telefono:parseInt(req.body.phone)
-        
-        
-    };
-    if(mc){
-        mc.query("INSERT INTO cliente SET ?", datosCliente, function(err, result){
-            if(err){
-                res.json({
-                    ok:false,
-                    mensaje: 'Error al crear al Cliente'
-                });
-            }else{
-                res.json({
-                    ok:true,
-                    mensaje:'Cliente creado correctamente'
-                });
-            }
-        });
-    }
-});
-
 // Routes
 app.use('/dulces', require('./routes/dulces-route'));
 app.use('/salados', require('./routes/salados-route'));

@@ -25,6 +25,8 @@ const crearCliente = async( req, res ) => {
             cliTelefono: req.body.telefono
         };
 
+        console.log(datosCliente);
+
         mysqlConnection.query("INSERT INTO cliente SET ?", datosCliente, (error, result) => {
             if(error){
                 return res.status(400).json({
