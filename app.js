@@ -10,15 +10,6 @@ const bodyParser = require('body-parser'); //- Se usa para mandar atributos que 
 // Crea el servidor
 var app = express();
 
-const mc=mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'sureno_cafe'
-});
-
-mc.connect();
-
 // Configurar Cors
 app.use((req, res, next) => {
     //Enable CORS
@@ -36,7 +27,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Routes
 app.use('/dulces', require('./routes/dulces-route'));
 app.use('/salados', require('./routes/salados-route'));
-app.use('/auth', require('./routes/auth-route'));
 app.use('/cliente', require('./routes/cliente-route'));
 app.use('/pedido', require('./routes/pedido-route'));
 

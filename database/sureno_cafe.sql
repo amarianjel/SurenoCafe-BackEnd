@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-08-2022 a las 06:56:29
+-- Tiempo de generación: 26-08-2022 a las 07:27:07
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -20,30 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `sureno_cafe`
 --
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `auth`
---
-
-CREATE TABLE `auth` (
-  `userId` int(11) NOT NULL,
-  `userName` varchar(150) NOT NULL,
-  `userEmail` varchar(100) NOT NULL,
-  `userPassword` varchar(255) NOT NULL,
-  `userImg` varchar(255) DEFAULT NULL,
-  `userRole` varchar(100) DEFAULT NULL,
-  `userToken` varchar(200) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `auth`
---
-
-INSERT INTO `auth` (`userId`, `userName`, `userEmail`, `userPassword`, `userImg`, `userRole`, `userToken`) VALUES
-(1, 'Café Sureño', 'adm@cafesureno.com', '$2b$10$gee/RMYqqiwcjlyCKiqTKeNmXJOFwcjZWBo.esN79VQvui6s7y43i', 'f', 'Administrador', NULL),
-(2, 'Prueba para los Put', 'prueba@cafesureno.com', '$2b$10$QIYWxpYtLLa/cA2NARODNu96kK.mhRxqdpTnO8MdqSm7xXERun5UC', '/assets/Auth/Flor.jpeg', 'Junior', NULL);
 
 -- --------------------------------------------------------
 
@@ -66,14 +42,18 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`cliName`, `cliEmail`, `cliPassword`, `cliImg`, `cliTelefono`, `cliToken`, `rol`) VALUES
-('Abraham Marianjel Sepúlveda', 'abraham@gmail.com', '$2b$10$KrnXqy91eNtTUkyswjUCvOBiHo26hp46tn0ocXlNWoGAuhYuNDfQy', NULL, '+569856236', NULL, 'user'),
+('Abraham Marianjel Sepúlveda', 'abraham@gmail.com', '$2b$10$KrnXqy91eNtTUkyswjUCvOBiHo26hp46tn0ocXlNWoGAuhYuNDfQy', NULL, '+569856236', NULL, 'admin'),
 ('Administrador', 'adm@cafesureno.com', '$2b$10$/pZnAZYo5yZsNqpFx5lxQO5N3jr8xPSO53dRJfNZI57u1J1OPd9QW', NULL, '569133133', NULL, 'admin'),
-('Akiles Bailo', 'akiles@gmail.com', '$2b$10$vNnBbPJieh.clLFuv/q0cOpPLCBRITDR5p0g8N4ZXhD4R6eNlpjwy', NULL, '+56985568', NULL, 'user'),
-('Dua Lipa2', 'dualipa2@gmail.com', '$2b$10$oeGgv7qhvMBhuMxYmQMyBO1FTbBfk0K/1Ln54qatXA4fjdBp1mzku', NULL, '+569090980', NULL, 'user'),
+('Akiles Bailo', 'akiles@gmail.com', '$2b$10$vNnBbPJieh.clLFuv/q0cOpPLCBRITDR5p0g8N4ZXhD4R6eNlpjwy', NULL, '+56985568', NULL, 'admin'),
+('Berry Van Der Beer', 'berry@gmail.com', '$2b$10$0Yvma2VI3S4OsWfEPAvhD.CtDBE9MqoX8mkRUUkJeGkrrbVUcNURq', NULL, '+569855744', NULL, 'user'),
+('Casandra Sepúlveda', 'casandra@gmail.com', '$2b$10$sjBT7ZAxsR8EuM35WWGmCO4qzQW/WluEbgc2dN9kGW6X.DkwRvbZW', NULL, '+56985521', NULL, 'user'),
+('Dua Lipa2', 'dualipa2@gmail.com', '$2b$10$oeGgv7qhvMBhuMxYmQMyBO1FTbBfk0K/1Ln54qatXA4fjdBp1mzku', NULL, '+569090980', NULL, 'admin'),
+('Felipe Lagos', 'felipe@gmail.com', '$2b$10$u.Rk9aCcIc3MFL/Xq/3vve.elsC/QT7O.9J/G3hFiaM78KfI19aoW', NULL, '+569855744', NULL, 'user'),
 ('Héctor Cárcamo', 'hector@gmail.com', '$2b$10$3ZfdcTd439CpA6h8ALt8Oe5w9bwge5kJ6kob9P9LE82cNqGSHuhZW', NULL, '+56985563', NULL, 'user'),
+('Juan Lagos', 'juan@gmail.com', '$2b$10$1A.L.VIVRkp7o95Gig7GSeS6UxoH/nwu.NcAlWuafh9aQZcUM25Z.', NULL, '+56985574', NULL, 'user'),
 ('Lubin Mora', 'lubin@gmail.com', '$2b$10$/UQ6stcrM6vjY8tkhDUUL.eRukJl2W96TTXrzibs/aO1csh2DQSeS', NULL, '+569856235', NULL, 'user'),
-('Matias Gaete', 'matias@gmail.com', '$2b$10$3NRp2IQjgJBpsHdHJxki5OhuK6yMPs28CsVVfUdi6e3PevRK3mQ4W', NULL, '+56985569', NULL, 'user'),
-('Sebastián Rochaa', 'se.rochacampos@gmail.com', '$2b$10$RXdftH5BNe8tW3z2MBK2gOSfssyY1o3wIr7FzXdo3nTX2JzECCkm.', NULL, '954395324', NULL, 'user'),
+('Matias Gaete', 'matias@gmail.com', '$2b$10$3NRp2IQjgJBpsHdHJxki5OhuK6yMPs28CsVVfUdi6e3PevRK3mQ4W', NULL, '+56985569', NULL, 'admin'),
+('Sebastián Rochaa', 'se.rochacampos@gmail.com', '$2b$10$RXdftH5BNe8tW3z2MBK2gOSfssyY1o3wIr7FzXdo3nTX2JzECCkm.', NULL, '954395324', NULL, 'admin'),
 ('Victor Marianjel', 'victor@gmail.com', '$2b$10$WSroxig6MB7mGjxOJoBdg.IGcqsG2pGRydIAQLD4FhAup2xqI0zHu', NULL, '+56985569', NULL, 'user');
 
 -- --------------------------------------------------------
@@ -282,12 +262,6 @@ INSERT INTO `salados` (`prodId`, `tipo`, `name`, `cantidad`, `price`, `descripti
 --
 
 --
--- Indices de la tabla `auth`
---
-ALTER TABLE `auth`
-  ADD PRIMARY KEY (`userId`);
-
---
 -- Indices de la tabla `cliente`
 --
 ALTER TABLE `cliente`
@@ -329,12 +303,6 @@ ALTER TABLE `salados`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
-
---
--- AUTO_INCREMENT de la tabla `auth`
---
-ALTER TABLE `auth`
-  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `dulces`
