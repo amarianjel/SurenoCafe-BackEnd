@@ -15,7 +15,7 @@ router.get('/', getPedidos);
 router.get('/historialSalados', getHistorialPedidosSalados);
 router.get('/historialDulces', getHistorialPedidosDulces);
 
-router.post('/',crearPedido);
+router.post('/', crearPedido);
 
 router.delete('/:id', borrarPedido);
 

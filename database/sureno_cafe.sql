@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-08-2022 a las 07:07:07
+-- Tiempo de generación: 26-08-2022 a las 06:56:29
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -57,17 +57,24 @@ CREATE TABLE `cliente` (
   `cliPassword` varchar(255) NOT NULL,
   `cliImg` varchar(255) DEFAULT NULL,
   `cliTelefono` varchar(16) NOT NULL,
-  `cliToken` varchar(200) DEFAULT NULL
+  `cliToken` varchar(200) DEFAULT NULL,
+  `rol` varchar(5) NOT NULL DEFAULT 'user'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `cliente`
 --
 
-INSERT INTO `cliente` (`cliName`, `cliEmail`, `cliPassword`, `cliImg`, `cliTelefono`, `cliToken`) VALUES
-('Abraham Marianjel Sepúlveda', 'abr@gmail.com', '$2b$10$TBYpxFrxieQabyP3my/Q2.ds2HQoJ/y.rg4p3Pzu6y778KvsMuwQ6', 'https://4.bp.blogspot.com/-ZjmN5oVtWPs/WFvd74Yyl4I/AAAAAAAAAv4/edwGnBzKwQIbAZ90o5LUKhgSiD64JnGDgCLcB/s640/6.jpg', '999044562', NULL),
-('Dua Lipa', 'dualipa@gmail.com', '$2b$10$X6dFz.dc91ftgy/Ghx3/LeF.Cxe/qnwL9oamHToiAtskc44kNfoyq', 'https://media.vogue.mx/photos/6082d0d36e82e15ad6aefd7a/2:3/w_2560%2Cc_limit/GettyImages-1307105605.jpg', '990990980', NULL),
-('Gokú', 'goku@dragonballz.cl', 'goku', 'https://depor.com/resizer/pfVziOV4X8Vu9nwknDc-oNItlB8=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/6Y2EDIISGFGVFANEVDCR5LCG34.jpg', '+56999044562', NULL);
+INSERT INTO `cliente` (`cliName`, `cliEmail`, `cliPassword`, `cliImg`, `cliTelefono`, `cliToken`, `rol`) VALUES
+('Abraham Marianjel Sepúlveda', 'abraham@gmail.com', '$2b$10$KrnXqy91eNtTUkyswjUCvOBiHo26hp46tn0ocXlNWoGAuhYuNDfQy', NULL, '+569856236', NULL, 'user'),
+('Administrador', 'adm@cafesureno.com', '$2b$10$/pZnAZYo5yZsNqpFx5lxQO5N3jr8xPSO53dRJfNZI57u1J1OPd9QW', NULL, '569133133', NULL, 'admin'),
+('Akiles Bailo', 'akiles@gmail.com', '$2b$10$vNnBbPJieh.clLFuv/q0cOpPLCBRITDR5p0g8N4ZXhD4R6eNlpjwy', NULL, '+56985568', NULL, 'user'),
+('Dua Lipa2', 'dualipa2@gmail.com', '$2b$10$oeGgv7qhvMBhuMxYmQMyBO1FTbBfk0K/1Ln54qatXA4fjdBp1mzku', NULL, '+569090980', NULL, 'user'),
+('Héctor Cárcamo', 'hector@gmail.com', '$2b$10$3ZfdcTd439CpA6h8ALt8Oe5w9bwge5kJ6kob9P9LE82cNqGSHuhZW', NULL, '+56985563', NULL, 'user'),
+('Lubin Mora', 'lubin@gmail.com', '$2b$10$/UQ6stcrM6vjY8tkhDUUL.eRukJl2W96TTXrzibs/aO1csh2DQSeS', NULL, '+569856235', NULL, 'user'),
+('Matias Gaete', 'matias@gmail.com', '$2b$10$3NRp2IQjgJBpsHdHJxki5OhuK6yMPs28CsVVfUdi6e3PevRK3mQ4W', NULL, '+56985569', NULL, 'user'),
+('Sebastián Rochaa', 'se.rochacampos@gmail.com', '$2b$10$RXdftH5BNe8tW3z2MBK2gOSfssyY1o3wIr7FzXdo3nTX2JzECCkm.', NULL, '954395324', NULL, 'user'),
+('Victor Marianjel', 'victor@gmail.com', '$2b$10$WSroxig6MB7mGjxOJoBdg.IGcqsG2pGRydIAQLD4FhAup2xqI0zHu', NULL, '+56985569', NULL, 'user');
 
 -- --------------------------------------------------------
 
@@ -81,6 +88,34 @@ CREATE TABLE `contienedulces` (
   `cantidad_producto` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `contienedulces`
+--
+
+INSERT INTO `contienedulces` (`id_pedido`, `prodId`, `cantidad_producto`) VALUES
+(10, 13, 10),
+(10, 14, 10),
+(10, 15, 10),
+(10, 16, 8),
+(11, 13, 10),
+(11, 14, 10),
+(11, 15, 10),
+(11, 16, 8),
+(12, 13, 1),
+(12, 14, 1),
+(12, 15, 1),
+(12, 16, 1),
+(13, 13, 1),
+(13, 14, 5),
+(13, 15, 1),
+(13, 16, 1),
+(14, 13, 1),
+(14, 14, 5),
+(14, 15, 1),
+(14, 16, 1),
+(15, 13, 1),
+(19, 2, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -92,6 +127,31 @@ CREATE TABLE `contienesalados` (
   `prodId` int(11) NOT NULL,
   `cantidad_producto` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `contienesalados`
+--
+
+INSERT INTO `contienesalados` (`id_pedido`, `prodId`, `cantidad_producto`) VALUES
+(10, 6, 1),
+(10, 10, 1),
+(10, 11, 1),
+(11, 6, 1),
+(11, 10, 1),
+(11, 11, 1),
+(12, 6, 1),
+(12, 10, 1),
+(12, 11, 1),
+(13, 6, 1),
+(13, 10, 5),
+(13, 11, 1),
+(14, 6, 1),
+(14, 10, 5),
+(14, 11, 1),
+(16, 1, 1),
+(16, 16, 1),
+(17, 1, 1),
+(18, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -115,7 +175,7 @@ CREATE TABLE `dulces` (
 --
 
 INSERT INTO `dulces` (`prodId`, `tipo`, `name`, `cantidad`, `price`, `description`, `imageUrl`, `stock`) VALUES
-(1, 'Pasteleria', 'Alfajores', '4 Unidades', 1590, 'Bocado pequeño, de textura suave, relleno con manjar blanco artesanal y espolvoreado con azúcar', '/assets/Dulces/Pastelería/Alfajores.jpg', 0),
+(1, 'Pasteleria', 'Alfajores', '4 Unidades', 1590, 'Bocado pequeño, de textura suave, relleno con manjar blanco artesanal y espolvoreado con azúcar', '/assets/Dulces/Pastelería/Alfajores.jpg', 10),
 (2, 'Pasteleria', 'Pie de limón', 'Unidad', 12000, 'Sabrosa tartaleta como base, rellena con una clásica mezcla de leche condensada y jugo de limón. Para cubrir abundante y vaporoso merengue. ¡Mmm, rico!', '/assets/Dulces/Pastelería/Pie-limon.jpg', 0),
 (3, 'Pasteleria', 'Tartaleta de frutas', 'Unidad', 12000, 'Delicada y fresca, ideal para la hora del té. Como base, masa de galletas que en su interior contiene una delicada crema pastelera con sabor a vainilla. Para terminar se cubre con abundantes berries frescos.', '/assets/Dulces/Pastelería/Tarta-berries.jpg', 0),
 (4, 'Pasteleria', 'Rollo de nuez', 'Unidad', 6800, 'Esponjoso panqueque de nuez, relleno con sabroso manjar. Enrollado como un brazo de reina y cubierto con una fina cobertura de chocolate. Un trocito, es el bocado preciso para endulzar el día.', '/assets/Dulces/Pastelería/Rollo-nuez.jpg', 0),
@@ -151,8 +211,25 @@ CREATE TABLE `pedido` (
   `fecha_pedido` date NOT NULL,
   `fecha_agendada` date NOT NULL,
   `email` varchar(255) NOT NULL,
-  `hora` varchar(5) NOT NULL
+  `hora` varchar(5) NOT NULL,
+  `local` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `pedido`
+--
+
+INSERT INTO `pedido` (`id_pedido`, `fecha_pedido`, `fecha_agendada`, `email`, `hora`, `local`) VALUES
+(10, '2022-07-25', '2022-07-29', 'se.rochacampos@gmail.com', '12:45', '5 de Abril'),
+(11, '2022-07-25', '2022-07-30', 'se.rochacampos@gmail.com', '11:15', 'Constitución'),
+(12, '2022-07-25', '2022-07-30', 'se.rochacampos@gmail.com', '12:00', 'Flores de Millán'),
+(13, '2022-07-25', '2022-07-30', 'se.rochacampos@gmail.com', '15:30', 'Constitución'),
+(14, '2022-07-25', '2022-07-30', 'se.rochacampos@gmail.com', '15:15', 'Constitución'),
+(15, '2022-07-25', '2022-07-31', 'se.rochacampos@gmail.com', '11:00', 'Constitución'),
+(16, '2022-07-25', '2022-07-27', 'se.rochacampos@gmail.com', '11:00', '5 de Abril'),
+(17, '2022-07-25', '2022-07-30', 'se.rochacampos@gmail.com', '13:45', 'Flores de Millán'),
+(18, '2022-07-25', '2022-07-30', 'se.rochacampos@gmail.com', '18:45', 'Constitución'),
+(19, '2022-07-25', '2022-07-26', 'se.rochacampos@gmail.com', '11:30', '5 de Abril');
 
 -- --------------------------------------------------------
 
@@ -269,7 +346,7 @@ ALTER TABLE `dulces`
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `salados`

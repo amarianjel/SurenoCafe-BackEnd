@@ -17,7 +17,7 @@ const getPedidos = async ( req, res = response ) => {
 }
 
 const getHistorialPedidosSalados = async ( req, res = response ) => {
-    mysqlConnection.query('select pedido.id_pedido, pedido.email, pedido.local, pedido.fecha_agendada, pedido.hora,   salados.name, contienesalados.cantidad_producto , salados.imageUrl from pedido join contienesalados on pedido.id_pedido=contienesalados.id_pedido join salados on contienesalados.prodId=salados.prodId', (err, rows, fields) => {
+    mysqlConnection.query('SELECT pedido.id_pedido, pedido.email, pedido.local, pedido.fecha_agendada, pedido.hora,   salados.name, contienesalados.cantidad_producto , salados.imageUrl FROM pedido JOIN contienesalados ON pedido.id_pedido=contienesalados.id_pedido JOIN salados ON contienesalados.prodId=salados.prodId', (err, rows, fields) => {
         if(!err) {
           res.json(rows);
         } else {
@@ -29,7 +29,7 @@ const getHistorialPedidosSalados = async ( req, res = response ) => {
 
 
 const getHistorialPedidosDulces = async ( req, res = response ) => {
-    mysqlConnection.query('select pedido.id_pedido, pedido.email, pedido.local, pedido.fecha_agendada, pedido.hora, dulces.name, contienedulces.cantidad_producto , dulces.imageUrl from pedido join contienedulces on pedido.id_pedido=contienedulces.id_pedido join dulces on contienedulces.prodId=dulces.prodId;', (err, rows, fields) => {
+    mysqlConnection.query('SELECT pedido.id_pedido, pedido.email, pedido.local, pedido.fecha_agendada, pedido.hora, dulces.name, contienedulces.cantidad_producto , dulces.imageUrl from pedido JOIN contienedulces ON pedido.id_pedido=contienedulces.id_pedido JOIN dulces ON contienedulces.prodId=dulces.prodId;', (err, rows, fields) => {
         if(!err) {
           res.json(rows);
         } else {
