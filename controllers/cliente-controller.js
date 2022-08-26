@@ -120,15 +120,20 @@ const login = async( req, res ) => {
 
 const actualizarCliente =  async(req, res) => {
     let email = req.params.email;   //+ Aqui debio ser un id, ya que es más fácil localizar por que es único
-    let cliente = req.body;
+    let cliente ={
+        cliName: req.body.name,
+        cliEmail: req.body.email,
+        cliTelefono: req.body.phone,
+        cliPassword: bcrypt.hashSync(req.body.password, 10)
+    }
 
     if (!email || !cliente) {
-        return res.status(400).send({ error: cliente, message: 'Debe proveer un email existente y los datos de un cliente' });
+        return res.status(400).send({ error: cliente, message: 'Debe proveer un email existente y los datos de un cliente', ok:false });
     }
     
     mysqlConnection.query("UPDATE cliente SET ? WHERE cliEmail = ?", [cliente, email], function(error, results, fields) {
         if (error) throw error;
-        return res.status(200).json({ "Mensaje": "Registro con el email =" + email + " ha sido actualizado"
+        return res.status(200).json({ "Mensaje": "Actualización con el email =" + email + " ha sido actualizado", ok:true
         });
     });
 }
