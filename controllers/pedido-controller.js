@@ -13,7 +13,35 @@ const getPedidos = async ( req, res = response ) => {
           console.log(err);
         }
       });
+
 }
+
+const getHistorialPedidosSalados = async ( req, res = response ) => {
+    mysqlConnection.query('select pedido.id_pedido, pedido.email, pedido.local, pedido.fecha_agendada, pedido.hora,   salados.name, contienesalados.cantidad_producto , salados.imageUrl from pedido join contienesalados on pedido.id_pedido=contienesalados.id_pedido join salados on contienesalados.prodId=salados.prodId', (err, rows, fields) => {
+        if(!err) {
+          res.json(rows);
+        } else {
+          console.log(err);
+        }
+      });
+      
+}
+
+
+const getHistorialPedidosDulces = async ( req, res = response ) => {
+    mysqlConnection.query('select pedido.id_pedido, pedido.email, pedido.local, pedido.fecha_agendada, pedido.hora,   salados.name, contienesalados.cantidad_producto , salados.imageUrl from pedido join contienesalados on pedido.id_pedido=contienesalados.id_pedido join salados on contienesalados.prodId=salados.prodId;', (err, rows, fields) => {
+        if(!err) {
+          res.json(rows);
+        } else {
+          console.log(err);
+        }
+      });
+      
+}
+
+
+
+
 
 const crearPedido = async( req, res ) => {
     try{
@@ -79,5 +107,7 @@ const borrarPedido =  async(req, res) => {
 module.exports = {
     getPedidos,
     crearPedido,
-    borrarPedido
+    borrarPedido,
+    getHistorialPedidosSalados,
+    getHistorialPedidosDulces
 }
