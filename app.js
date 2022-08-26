@@ -2,8 +2,6 @@ require('dotenv').config();
 
 //Requiere
 var express = require('express');
-const mysql=require('mysql');
-var bcrypt= require('bcrypt');
 //var cors = require('cors');
 const bodyParser = require('body-parser'); //- Se usa para mandar atributos que no sean Json
 
